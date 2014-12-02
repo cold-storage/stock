@@ -1,0 +1,20 @@
+{
+  "name": "stock",
+  "version": "0.0.1",
+  "description": "Stock Stuff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Stein",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "2.3.11",
+    "config": "1.8.1",
+    "lodash": "2.4.1",
+    "pg": "3.6.3"
+  },
+  "devDependencies": {
+    "lab": "5.1.0"
+  }
+}
