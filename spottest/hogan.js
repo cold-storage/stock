@@ -8,25 +8,25 @@ var template = require('../lib/template');
 
 lab.experiment('hogan tests', function() {
 
-	lab.test('will template', function(done) {
+  lab.test('will template', function(done) {
 
-		var output = template.render('./aux/db/00-init.sql', config.db);
-		console.log('path param', output);
+    var output = template.render('./aux/db/00-init.sql', config.db);
+    console.log('path param', output);
 
-		output = template.render(sql, config.db);
-		console.log('string param', output);
+    output = template.render(sql, config.db);
+    console.log('string param', output);
 
-		done();
+    done();
 
-	});
+  });
 
-	lab.test('will do simple template', function(done) {
+  lab.test('will do simple template', function(done) {
 
-		var tmp = Hogan.compile(sql);
-		var output = tmp.render(config.db);
-		console.log('Hogan hero!', output);
-		done();
+    var tmp = Hogan.compile(sql);
+    var output = tmp.render(config.db);
+    console.log('Hogan hero!', output);
+    done();
 
-	});
+  });
 
 });

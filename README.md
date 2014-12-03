@@ -1,4 +1,3 @@
-stock
-=====
+# stock
 
 Stock Stuff
