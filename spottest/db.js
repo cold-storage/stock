@@ -4,15 +4,14 @@ var pg = require('pg');
 var config = require('config');
 var Promise = require('bluebird');
 var pgp = Promise.promisifyAll(pg);
-var Db = require('../lib/db/db');
-var db = new Db(config.db.adminUrl);
-var statements = require('fs').readFileSync('./db/00-init.sql', {
-  encoding: 'utf8'
-});
+var Db = require('../lib/db');
+var db = new Db(config.db.admin.url);
+var template = require('../lib/template');
+var statements = template.render('./aux/db/00-init.sql', config.db);
 
 function query(text, vals) {
   var args = arguments;
-  return pgp.connectAsync(config.db.adminUrl)
+  return pgp.connectAsync(config.db.admin.url)
     .spread(function(client, done) {
       return client.queryAsync.apply(client, args)
         .then(function(result) {
@@ -70,7 +69,7 @@ lab.experiment('db hello world', function() {
   });
 
   lab.test('promise will connect', function(done) {
-    pgp.connectAsync(config.db.adminUrl)
+    pgp.connectAsync(config.db.admin.url)
       .spread(function(client, clientDone) {
         client.queryAsync('SELECT $1::int AS number', ['1'])
           .then(function(qres) {
@@ -83,7 +82,7 @@ lab.experiment('db hello world', function() {
   });
 
   lab.test('will connect', function(done) {
-    pg.connect(config.db.adminUrl, function(err, client, next) {
+    pg.connect(config.db.admin.url, function(err, client, next) {
       if (err) {
         return console.error('error fetching client from pool', err);
       }

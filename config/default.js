@@ -1,6 +1,29 @@
-module.exports = {
+// postgres://role:pw@host:port/db
+function buildUrl(cfg) {
+	return 'postgres://' + cfg.role + ':' +
+		cfg.pw + '@' + cfg.host + ':' + cfg.port + '/' + cfg.db;
+}
+
+var cfg = {
 	db: {
-		adminUrl: 'postgres://postgres:qwer1234@localhost:5432/postgres',
-		stockUrl: 'postgres://stock:stock@localhost:5432/stock'
+		admin: {
+			db: 'postgres',
+			role: 'postgres',
+			pw: 'qwer1234',
+			host: 'localhost',
+			port: 5432
+		},
+		stock: {
+			db: 'stock',
+			role: 'stock',
+			pw: 'stock',
+			host: 'localhost',
+			port: 5432
+		}
 	}
 };
+
+cfg.db.admin.url = buildUrl(cfg.db.admin);
+cfg.db.stock.url = buildUrl(cfg.db.stock);
+
+module.exports = cfg;
