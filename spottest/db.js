@@ -7,7 +7,7 @@ var pgp = Promise.promisifyAll(pg);
 var Db = require('../lib/db');
 var db = new Db(config.db.admin.url);
 var template = require('../lib/template');
-var statements = template.render('./aux/db/00-init.sql', config.db);
+var statements = template.render('./aux/db/0000-create-role-db.sql', config.db);
 
 function query(text, vals) {
   var args = arguments;
